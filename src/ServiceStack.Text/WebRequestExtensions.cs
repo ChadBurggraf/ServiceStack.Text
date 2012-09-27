@@ -6,12 +6,27 @@ namespace ServiceStack.Text
 {
     public static class WebRequestExtensions
     {
-        public static string GetJsonFromUrl(this string url, Action<HttpWebResponse> responseFilter = null)
+        public static string GetJsonFromUrl(this string url)
+        {
+            return url.GetJsonFromUrl(null);
+        }
+
+        public static string GetJsonFromUrl(this string url, Action<HttpWebResponse> responseFilter)
         {
             return url.GetStringFromUrl("application/json", responseFilter);
         }
 
-        public static string GetStringFromUrl(this string url, string acceptContentType = "*/*", Action<HttpWebResponse> responseFilter = null)
+        public static string GetStringFromUrl(this string url)
+        {
+            return url.GetStringFromUrl(null);
+        }
+
+        public static string GetStringFromUrl(this string url, Action<HttpWebResponse> responseFilter)
+        {
+            return url.GetStringFromUrl("*/*", responseFilter);
+        }
+
+        public static string GetStringFromUrl(this string url, string acceptContentType, Action<HttpWebResponse> responseFilter)
         {
             var webReq = (HttpWebRequest)WebRequest.Create(url);
             webReq.Accept = acceptContentType;

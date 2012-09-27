@@ -107,7 +107,12 @@ namespace ServiceStack.Text
 			return dateTime.ToStableUniversalTime().RoundToSecond().Equals(otherDateTime.ToStableUniversalTime().RoundToSecond());
 		}
 
-		public static string ToTimeOffsetString(this TimeSpan offset, bool includeColon = false)
+        public static string ToTimeOffsetString(this TimeSpan offset)
+		{
+            return offset.ToTimeOffsetString(false);
+        }
+
+		public static string ToTimeOffsetString(this TimeSpan offset, bool includeColon)
 		{
 			var sign = offset < TimeSpan.Zero ? "-" : "+";
 			var hours = Math.Abs(offset.Hours);

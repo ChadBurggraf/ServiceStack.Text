@@ -23,8 +23,17 @@ namespace ServiceStack.Text
                 new XmlDictionaryReaderQuotas { MaxStringContentLength = 1024 * 1024, }
 #endif
 );
+        public XmlSerializer()
+            : this(null, false)
+        {
+        }
 
-        public XmlSerializer(XmlDictionaryReaderQuotas quotas=null, bool omitXmlDeclaration = false)
+        public XmlSerializer(XmlDictionaryReaderQuotas quotas)
+            : this(quotas, false)
+        {
+        }
+
+        public XmlSerializer(XmlDictionaryReaderQuotas quotas, bool omitXmlDeclaration)
         {
             this.quotas = quotas;
             XSettings.Encoding = new UTF8Encoding(false);
